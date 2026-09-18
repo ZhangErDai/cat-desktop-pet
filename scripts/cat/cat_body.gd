@@ -45,6 +45,23 @@ func start_move_to(target: Vector2, requested_mode: String, walk_speed: float, r
 	moving = true
 	print("[桌宠调试] 猫咪物理移动：target=%s mode=%s speed=%.1f direction=%s" % [target_position, actual_mode, movement_speed, movement_direction])
 
+func update_move_target(target: Vector2, requested_mode: String, walk_speed: float, run_speed: float, run_threshold: float) -> void:
+	## 移动中更新目标，不重置 movement_callback，也不重新创建一段移动。
+	if not moving:
+		return
+	target_position = target
+	var distance := global_position.distance_to(target_position)
+	var actual_mode := requested_mode
+	if requested_mode == "auto":
+		actual_mode = "run" if distance >= run_threshold else "walk"
+	movement_speed = run_speed if actual_mode == "run" else walk_speed
+	movement_direction = _get_animation_direction(target_position - global_position)
+	if actual_mode == "run":
+		animator.play_run(movement_direction)
+	else:
+		animator.play_walk(movement_direction)
+	print("[桌宠调试] 猫咪物理移动更新目标：target=%s mode=%s speed=%.1f" % [target_position, actual_mode, movement_speed])
+
 func _physics_process(delta: float) -> void:
 	if not moving:
 		velocity = Vector2.ZERO

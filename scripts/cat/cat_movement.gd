@@ -66,6 +66,24 @@ func run_to(target: Vector2, on_finished: Callable = Callable()) -> bool:
 func auto_to(target: Vector2, on_finished: Callable = Callable()) -> bool:
 	return move_to(target, "auto", on_finished)
 
+func retarget_to(target: Vector2, requested_mode: String = "auto") -> bool:
+	## 允许玩球模块在猫咪移动途中更新目标，不会丢失原来的结束回调。
+	if not moving or body == null:
+		return false
+	if room_collision and not room_collision.is_inside_walkable_area(target):
+		print("[桌宠调试] CatMovement 拒绝更新目标：目标不在房间可行走区域 target=%s" % target)
+		return false
+	target_position = target
+	var distance := body.global_position.distance_to(target)
+	var actual_mode := requested_mode
+	if requested_mode == "auto":
+		actual_mode = "run" if distance >= _get_run_threshold() else "walk"
+	if cat_state:
+		cat_state.set_state(CatState.RUNNING if actual_mode == "run" else CatState.MOVING)
+	body.update_move_target(target, requested_mode, _get_walk_speed(), _get_run_speed(), _get_run_threshold())
+	print("[桌宠调试] CatMovement 更新移动目标：target=%s mode=%s" % [target, actual_mode])
+	return true
+
 func cancel_move() -> void:
 	## 统一的移动打断入口，业务模块不直接操作 CatBody 的内部字段。
 	if not moving:

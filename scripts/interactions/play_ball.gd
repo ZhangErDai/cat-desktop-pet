@@ -21,6 +21,7 @@ signal status_changed(text: String)
 
 var playing: bool = false
 var chasing: bool = false
+var chase_refresh_scheduled: bool = false
 var rng := RandomNumberGenerator.new()
 var settings: PetSettings
 
@@ -55,7 +56,10 @@ func handle_mouse_click(world_position: Vector2) -> bool:
 		chasing = true
 		if cat_state:
 			cat_state.set_state(CatState.CHASING)
-		get_tree().create_timer(0.55).timeout.connect(_request_chase)
+		_schedule_chase_refresh(0.0)
+	else:
+		# 猫咪已经在追球时，第二次及后续点击也必须立即刷新追球目标。
+		_schedule_chase_refresh(0.0)
 	print("[桌宠调试] 陪玩点击球：ball=%s click=%s" % [ball.global_position, world_position])
 	print("[桌宠调试] 陪玩追球状态：playing=%s chasing=%s" % [playing, chasing])
 	return true
@@ -79,12 +83,21 @@ func _request_chase() -> void:
 		print("[桌宠调试] 陪玩追球判定成功：猫咪已经接近球")
 		_finish_chase(true)
 		return
+	if movement.is_moving():
+		var retargeted := movement.retarget_to(ball.global_position, "auto")
+		if retargeted and ball.rolling:
+			_schedule_chase_refresh(0.12)
+		elif not retargeted:
+			_schedule_chase_refresh(0.05)
+		return
 	var accepted := movement.auto_to(ball.global_position, _on_cat_move_finished)
 	if not accepted:
-		# 如果猫咪刚完成上一段移动，下一帧再请求，避免丢失追球请求。
+		# 如果猫咪刚完成上一段移动，稍后再请求，避免丢失追球请求。
 		print("[桌宠调试] 陪玩追球请求暂缓：CatMovement 当前正在移动")
-		get_tree().create_timer(0.05).timeout.connect(_request_chase)
+		_schedule_chase_refresh(0.05)
 		return
+	if ball.rolling:
+		_schedule_chase_refresh(0.12)
 	print("[桌宠调试] 陪玩追球：猫咪=%s 球=%s" % [cat.global_position, ball.global_position])
 
 func _on_cat_move_finished(_reached: bool) -> void:
@@ -97,6 +110,7 @@ func _on_cat_move_finished(_reached: bool) -> void:
 func _finish_chase(caught: bool) -> void:
 	chasing = false
 	playing = false
+	chase_refresh_scheduled = false
 	ball.stop()
 	if caught:
 		ball.visible = false
@@ -116,6 +130,7 @@ func cancel(reason: String = "被其他动作打断") -> void:
 	_debug_log("陪玩被强制结束：reason=%s" % reason)
 	playing = false
 	chasing = false
+	chase_refresh_scheduled = false
 	ball.stop()
 	ball.visible = false
 	if cat_state:
@@ -153,6 +168,15 @@ func _get_spawn_position() -> Vector2:
 
 func _is_valid_spawn(candidate: Vector2) -> bool:
 	return collision_rules.is_spawn_position_valid(ball, candidate)
+
+func _schedule_chase_refresh(delay: float) -> void:
+	if chase_refresh_scheduled:
+		return
+	chase_refresh_scheduled = true
+	get_tree().create_timer(delay).timeout.connect(func():
+		chase_refresh_scheduled = false
+		_request_chase()
+	)
 
 func _get_catch_distance() -> float:
 	return settings.ball_catch_distance if settings else 58.0
