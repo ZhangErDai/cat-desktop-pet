@@ -50,7 +50,7 @@ func start_play() -> bool:
 func handle_mouse_click(world_position: Vector2) -> bool:
 	if not playing or not ball.visible or not ball.contains_point(world_position):
 		return false
-	ball.roll_away_from(cat.global_position)
+	ball.roll_randomly()
 	status_changed.emit("球在地板上滚动，猫咪继续追过去啦！")
 	if not chasing:
 		chasing = true
@@ -70,7 +70,7 @@ func handle_key(event: InputEventKey) -> bool:
 	var key_index := int(event.keycode) - int(KEY_1)
 	if key_index < 0 or key_index >= 5:
 		return false
-	ball.roll_away_from(cat.global_position)
+	ball.roll_randomly()
 	status_changed.emit("啪！球被推远了，猫咪继续追逐中！")
 	print("[桌宠调试] 陪玩快捷键推动球：key=%s" % event.keycode)
 	return true

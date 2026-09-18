@@ -2,7 +2,7 @@ class_name PetBall
 extends CharacterBody2D
 
 ## 玩具球控制器。
-## 球只在地板上水平运动，碰撞由 CharacterBody2D + CollisionShape2D 处理。
+## 球只在地板平面内二维运动，碰撞由 CharacterBody2D + CollisionShape2D 处理。
 
 signal stopped
 
@@ -15,6 +15,10 @@ signal stopped
 @export var rolling_friction: float = 90.0
 var rolling: bool = false
 var ball_rotation: float = 0.0
+var rng := RandomNumberGenerator.new()
+
+func _ready() -> void:
+	rng.randomize()
 
 func configure_room_bounds(left: float, right: float, next_floor_y: float) -> void:
 	# 房间场景统一传入边界，球不再依赖脚本里的固定房间尺寸。
@@ -37,20 +41,24 @@ func stop() -> void:
 	rolling = false
 	queue_redraw()
 
-func roll_away_from(cat_position: Vector2) -> void:
-	# 球沿地板水平滚动，不再在空中漂移。
-	# 如果球已经在滚动，继续点击会追加推动力，而不是重置成固定速度。
-	var direction: float = sign(position.x - cat_position.x)
-	if direction == 0.0:
-		direction = 1.0
-	if absf(velocity.x) < 8.0 or sign(velocity.x) != direction:
-		velocity.x = direction * 330.0
+func roll_randomly() -> void:
+	# 每次点击随机选择二维方向，球不再只沿左右直线滚动。
+	# y 方向代表地板平面上的上下移动，不是离开地面。
+	var direction := Vector2(rng.randf_range(-1.0, 1.0), rng.randf_range(-0.72, 0.72))
+	if direction.length_squared() < 0.05:
+		direction = Vector2.RIGHT
+	direction = direction.normalized()
+	if not rolling or velocity.length() < 8.0:
+		velocity = direction * 330.0
 	else:
-		velocity.x = clampf(velocity.x + direction * kick_speed, -max_roll_speed, max_roll_speed)
-	velocity.y = 0.0
+		velocity = (velocity + direction * kick_speed).limit_length(max_roll_speed)
 	rolling = true
 	visible = true
-	print("[桌宠调试] 球受到推动：direction=%s speed=%.1f" % ["左" if direction < 0.0 else "右", absf(velocity.x)])
+	print("[桌宠调试] 球随机滚动：direction=%s speed=%.1f" % [direction, velocity.length()])
+
+func roll_away_from(_cat_position: Vector2) -> void:
+	# 兼容旧调用名；新的玩球逻辑使用 roll_randomly()。
+	roll_randomly()
 
 func contains_point(point: Vector2) -> bool:
 	# 鼠标位置由主场景转换为全局坐标，因此这里也使用全局坐标比较。
@@ -59,8 +67,7 @@ func contains_point(point: Vector2) -> bool:
 func _physics_process(delta: float) -> void:
 	if not rolling:
 		return
-	# 球保持在地板滚动线；左右墙体和家具碰撞体仍由 Godot 物理引擎处理。
-	velocity.y = 0.0
+	# 球在地板平面内二维滚动；房间边界由 Godot 物理碰撞体处理。
 	ball_rotation += velocity.x * delta * 0.045
 	var collision := move_and_collide(velocity * delta)
 	if collision:
@@ -75,12 +82,10 @@ func _physics_process(delta: float) -> void:
 		velocity = reflected
 		# 轻微把球推离碰撞面，避免下一帧继续嵌在边界上。
 		global_position += normal * 0.5
-		velocity.y = 0.0
-		position.y = floor_y
 		position.x = clampf(position.x, room_left + radius, room_right - radius)
-		print("[桌宠调试] 球发生物理碰撞：collider=%s normal=%s speed=%.1f direction=%s" % [collision.get_collider().name, normal, absf(velocity.x), "左" if velocity.x < 0.0 else "右"])
-	velocity.x = move_toward(velocity.x, 0.0, rolling_friction * delta)
-	if absf(velocity.x) < 8.0:
+		print("[桌宠调试] 球发生物理碰撞：collider=%s normal=%s speed=%.1f velocity=%s" % [collision.get_collider().name, normal, velocity.length(), velocity])
+	velocity = velocity.move_toward(Vector2.ZERO, rolling_friction * delta)
+	if velocity.length() < 8.0:
 		velocity = Vector2.ZERO
 		rolling = false
 		stopped.emit()

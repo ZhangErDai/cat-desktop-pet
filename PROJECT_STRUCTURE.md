@@ -85,7 +85,7 @@ Godot Physics 碰撞体
 
 1. `PetInteractions` 调用 `PlayBall.start_play()`。
 2. `PlayBall` 在猫咪附近、摄像机可见范围或整个可行走区域内选择安全生成点。
-3. 用户点击球时，`PlayBall` 调用 `Ball.roll_away_from()`。
+3. 用户点击球时，`PlayBall` 调用 `Ball.roll_randomly()`，球在地板平面内随机二维滚动。
 4. `PlayBall` 调用 `CatMovement.auto_to(ball.global_position)` 追球；球再次被点击时，调用 `retarget_to()` 更新正在移动中的目标。
 5. 球滚动、摩擦和反弹由 `ball.gd` 处理，球不能离开 `RoomCollision`/地板边界。
 6. 猫咪距离球达到 `ball_catch_distance` 后，球隐藏并发出 `finished(true)`。
@@ -123,7 +123,7 @@ Godot Physics 碰撞体
 桌面输入
   → desktop_pet.gd
   → PlayBall.handle_mouse_click()
-  → PetBall.roll_away_from()
+  → PetBall.roll_randomly()
   → PlayBall._request_chase()
   → CatMovement.auto_to() / retarget_to()
   → CatBody.start_move_to()
