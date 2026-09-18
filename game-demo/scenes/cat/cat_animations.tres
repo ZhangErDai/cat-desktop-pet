@@ -1,0 +1,422 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://b0vmccuhqga6u"]
+
+[ext_resource type="Texture2D" uid="uid://b2gip5bnrwpj1" path="res://art/cat/cat_walk_4dir.png" id="1_walk"]
+[ext_resource type="Texture2D" uid="uid://brdfyuwcdqhtc" path="res://art/cat/cat_run_4dir.png" id="2_run"]
+[ext_resource type="Texture2D" uid="uid://cvoxwiwy42xj" path="res://art/cat/cat_eat_drink.png" id="3_action"]
+[ext_resource type="Texture2D" uid="uid://blp7rjodq3bll" path="res://art/cat/cat_bed_action.png" id="4_bed"]
+
+[sub_resource type="AtlasTexture" id="Drink0"]
+atlas = ExtResource("3_action")
+region = Rect2(0, 443.5, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="Drink1"]
+atlas = ExtResource("3_action")
+region = Rect2(443.5, 443.5, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="Drink2"]
+atlas = ExtResource("3_action")
+region = Rect2(887, 443.5, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="Drink3"]
+atlas = ExtResource("3_action")
+region = Rect2(1330.5, 443.5, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="Eat0"]
+atlas = ExtResource("3_action")
+region = Rect2(0, 0, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="Eat1"]
+atlas = ExtResource("3_action")
+region = Rect2(443.5, 0, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="Eat2"]
+atlas = ExtResource("3_action")
+region = Rect2(887, 0, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="Eat3"]
+atlas = ExtResource("3_action")
+region = Rect2(1330.5, 0, 443.5, 443.5)
+
+[sub_resource type="AtlasTexture" id="WalkFront0"]
+atlas = ExtResource("1_walk")
+region = Rect2(0, 0, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkFront1"]
+atlas = ExtResource("1_walk")
+region = Rect2(318, 0, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkFront2"]
+atlas = ExtResource("1_walk")
+region = Rect2(636, 0, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkFront3"]
+atlas = ExtResource("1_walk")
+region = Rect2(954, 0, 318, 309)
+
+[sub_resource type="AtlasTexture" id="Knead0"]
+atlas = ExtResource("4_bed")
+region = Rect2(0, 0, 384, 512)
+
+[sub_resource type="AtlasTexture" id="Knead1"]
+atlas = ExtResource("4_bed")
+region = Rect2(384, 0, 384, 512)
+
+[sub_resource type="AtlasTexture" id="Knead2"]
+atlas = ExtResource("4_bed")
+region = Rect2(768, 0, 384, 512)
+
+[sub_resource type="AtlasTexture" id="Knead3"]
+atlas = ExtResource("4_bed")
+region = Rect2(1152, 0, 384, 512)
+
+[sub_resource type="AtlasTexture" id="RunBack0"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 299.75, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunBack1"]
+atlas = ExtResource("2_run")
+region = Rect2(328, 299.75, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunBack2"]
+atlas = ExtResource("2_run")
+region = Rect2(656, 299.75, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunBack3"]
+atlas = ExtResource("2_run")
+region = Rect2(984, 299.75, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunFront0"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 0, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunFront1"]
+atlas = ExtResource("2_run")
+region = Rect2(328, 0, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunFront2"]
+atlas = ExtResource("2_run")
+region = Rect2(656, 0, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunFront3"]
+atlas = ExtResource("2_run")
+region = Rect2(984, 0, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunLeft0"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 599.5, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunLeft1"]
+atlas = ExtResource("2_run")
+region = Rect2(328, 599.5, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunLeft2"]
+atlas = ExtResource("2_run")
+region = Rect2(656, 599.5, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunLeft3"]
+atlas = ExtResource("2_run")
+region = Rect2(984, 599.5, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunRight0"]
+atlas = ExtResource("2_run")
+region = Rect2(0, 899.25, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunRight1"]
+atlas = ExtResource("2_run")
+region = Rect2(328, 899.25, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunRight2"]
+atlas = ExtResource("2_run")
+region = Rect2(656, 899.25, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="RunRight3"]
+atlas = ExtResource("2_run")
+region = Rect2(984, 899.25, 328, 299.75)
+
+[sub_resource type="AtlasTexture" id="Sleep0"]
+atlas = ExtResource("4_bed")
+region = Rect2(0, 512, 384, 512)
+
+[sub_resource type="AtlasTexture" id="Sleep1"]
+atlas = ExtResource("4_bed")
+region = Rect2(384, 512, 384, 512)
+
+[sub_resource type="AtlasTexture" id="Sleep2"]
+atlas = ExtResource("4_bed")
+region = Rect2(768, 512, 384, 512)
+
+[sub_resource type="AtlasTexture" id="Sleep3"]
+atlas = ExtResource("4_bed")
+region = Rect2(1152, 512, 384, 512)
+
+[sub_resource type="AtlasTexture" id="WalkBack0"]
+atlas = ExtResource("1_walk")
+region = Rect2(0, 309, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkBack1"]
+atlas = ExtResource("1_walk")
+region = Rect2(318, 309, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkBack2"]
+atlas = ExtResource("1_walk")
+region = Rect2(636, 309, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkBack3"]
+atlas = ExtResource("1_walk")
+region = Rect2(954, 309, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkLeft0"]
+atlas = ExtResource("1_walk")
+region = Rect2(0, 618, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkLeft1"]
+atlas = ExtResource("1_walk")
+region = Rect2(318, 618, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkLeft2"]
+atlas = ExtResource("1_walk")
+region = Rect2(636, 618, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkLeft3"]
+atlas = ExtResource("1_walk")
+region = Rect2(954, 618, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkRight0"]
+atlas = ExtResource("1_walk")
+region = Rect2(0, 927, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkRight1"]
+atlas = ExtResource("1_walk")
+region = Rect2(318, 927, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkRight2"]
+atlas = ExtResource("1_walk")
+region = Rect2(636, 927, 318, 309)
+
+[sub_resource type="AtlasTexture" id="WalkRight3"]
+atlas = ExtResource("1_walk")
+region = Rect2(954, 927, 318, 309)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Drink0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Drink1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Drink2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Drink3")
+}],
+"loop": 1,
+"name": &"drink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Eat0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Eat3")
+}],
+"loop": 1,
+"name": &"eat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("WalkFront0")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkFront1")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkFront2")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkFront3")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Knead0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Knead1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Knead2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Knead3")
+}],
+"loop": 1,
+"name": &"knead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("RunBack0")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunBack1")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunBack2")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunBack3")
+}],
+"loop": 1,
+"name": &"run_back",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("RunFront0")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunFront1")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunFront2")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunFront3")
+}],
+"loop": 1,
+"name": &"run_front",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("RunLeft0")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunLeft1")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunLeft2")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunLeft3")
+}],
+"loop": 1,
+"name": &"run_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("RunRight0")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunRight1")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunRight2")
+}, {
+"duration": 1.0,
+"texture": SubResource("RunRight3")
+}],
+"loop": 1,
+"name": &"run_right",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Sleep0")
+}, {
+"duration": 1.0,
+"texture": SubResource("Sleep1")
+}, {
+"duration": 1.0,
+"texture": SubResource("Sleep2")
+}, {
+"duration": 1.0,
+"texture": SubResource("Sleep3")
+}],
+"loop": 1,
+"name": &"sleep",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("WalkBack0")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkBack1")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkBack2")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkBack3")
+}],
+"loop": 1,
+"name": &"walk_back",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("WalkFront0")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkFront1")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkFront2")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkFront3")
+}],
+"loop": 1,
+"name": &"walk_front",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("WalkLeft0")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkLeft1")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkLeft2")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkLeft3")
+}],
+"loop": 1,
+"name": &"walk_left",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("WalkRight0")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkRight1")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkRight2")
+}, {
+"duration": 1.0,
+"texture": SubResource("WalkRight3")
+}],
+"loop": 1,
+"name": &"walk_right",
+"speed": 8.0
+}]

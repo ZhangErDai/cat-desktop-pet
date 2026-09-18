@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://blwpvscl8qoet"]
+
+[ext_resource type="Script" uid="uid://djdm543188ok4" path="res://scripts/ball/ball.gd" id="1_ball"]
+
+[node name="Ball" type="Node2D" unique_id=216684184]
+z_index = 4
+script = ExtResource("1_ball")

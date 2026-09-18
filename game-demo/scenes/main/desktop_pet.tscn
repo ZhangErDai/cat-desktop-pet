@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cnaphjyim5usc"]
+
+[ext_resource type="Script" uid="uid://k0ror76nhaae" path="res://scripts/main/desktop_pet.gd" id="1_desktop_pet"]
+[ext_resource type="PackedScene" uid="uid://di7ovu06av6re" path="res://scenes/room/room.tscn" id="2_room"]
+[ext_resource type="PackedScene" path="res://scenes/cat/cat.tscn" id="3_cat"]
+[ext_resource type="PackedScene" path="res://scenes/ball/ball.tscn" id="4_ball"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_menu.tscn" id="5_settings"]
+[ext_resource type="Script" path="res://scripts/interactions/play_ball.gd" id="6_play_ball"]
+[ext_resource type="Script" path="res://scripts/interactions/pet_interactions.gd" id="7_pet_interactions"]
+[ext_resource type="Script" path="res://scripts/core/pet_state_monitor.gd" id="8_state_monitor"]
+
+[node name="DesktopPet" type="Node2D" unique_id=2137689957]
+script = ExtResource("1_desktop_pet")
+
+[node name="Room" parent="." unique_id=2116678778 instance=ExtResource("2_room")]
+
+[node name="Cat" parent="." unique_id=373937896 instance=ExtResource("3_cat")]
+position = Vector2(360, 700)
+
+[node name="Ball" parent="." unique_id=399238111 instance=ExtResource("4_ball")]
+
+[node name="PlayBall" type="Node" parent="."]
+script = ExtResource("6_play_ball")
+
+[node name="PetInteractions" type="Node" parent="."]
+script = ExtResource("7_pet_interactions")
+
+[node name="PetStateMonitor" type="Node" parent="."]
+script = ExtResource("8_state_monitor")
+
+[node name="Timer" type="Timer" parent="PetStateMonitor"]
+wait_time = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1276355902]
+position = Vector2(320, 300)
+limit_left = 0
+limit_top = 0
+limit_right = 2450
+limit_bottom = 820
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=160625896]
+layer = 10
+
+[node name="SettingsMenu" parent="SettingsLayer" unique_id=311356250 instance=ExtResource("5_settings")]

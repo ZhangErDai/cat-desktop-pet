@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://di7ovu06av6re"]
+
+[ext_resource type="Script" path="res://scripts/room/room_collision.gd" id="3_room_collision"]
+
+[ext_resource type="Script" uid="uid://ddc5a7crn8yft" path="res://scripts/room/room.gd" id="1_room"]
+[ext_resource type="Texture2D" uid="uid://dy7rgymx0340g" path="res://art/room/room_floor_download.png" id="2_floor"]
+[ext_resource type="Texture2D" uid="uid://nrt0sqkhino0" path="res://art/room/room_wall_back_room.png" id="2_wall_back"]
+
+[sub_resource type="SegmentShape2D" id="FloorTopEdge"]
+a = Vector2(253, 577)
+b = Vector2(2404, 575)
+
+[sub_resource type="SegmentShape2D" id="FloorRightEdge"]
+a = Vector2(1845, 592)
+b = Vector2(1630, 800)
+
+[sub_resource type="SegmentShape2D" id="FloorBottomEdge"]
+a = Vector2(2190, 781)
+b = Vector2(26, 781)
+
+[sub_resource type="SegmentShape2D" id="FloorLeftEdge"]
+a = Vector2(31, 779)
+b = Vector2(257, 575)
+
+[node name="Room" type="Node2D" unique_id=1873050331]
+script = ExtResource("1_room")
+
+[node name="RoomCollision" type="Node" parent="."]
+script = ExtResource("3_room_collision")
+
+[node name="BackgroundColor" type="Polygon2D" parent="." unique_id=1358883401]
+z_index = -50
+position = Vector2(243.99998, 2.9999998)
+scale = Vector2(0.8877551, 0.6926829)
+color = Color(0.12, 0.1, 0.14, 1)
+polygon = PackedVector2Array(0, 0, 2450, 0, 2450, 820, 0, 820)
+
+[node name="WallImg" type="Sprite2D" parent="." unique_id=1358883402]
+z_index = -40
+position = Vector2(1333.5, 285)
+scale = Vector2(0.9986188, 0.78176796)
+texture = ExtResource("2_wall_back")
+
+[node name="FloorImg" type="Sprite2D" parent="." unique_id=118632364]
+z_index = -30
+texture_filter = 1
+position = Vector2(1221, 687)
+scale = Vector2(1.1234844, 1)
+texture = ExtResource("2_floor")
+
+[node name="FloorCollision" type="StaticBody2D" parent="." unique_id=952256276]
+
+[node name="TopEdge" type="CollisionShape2D" parent="FloorCollision" unique_id=1463575473]
+shape = SubResource("FloorTopEdge")
+
+[node name="RightEdge" type="CollisionShape2D" parent="FloorCollision" unique_id=1463575474]
+position = Vector2(559, -18)
+shape = SubResource("FloorRightEdge")
+
+[node name="BottomEdge" type="CollisionShape2D" parent="FloorCollision" unique_id=1463575475]
+shape = SubResource("FloorBottomEdge")
+
+[node name="LeftEdge" type="CollisionShape2D" parent="FloorCollision" unique_id=1463575476]
+shape = SubResource("FloorLeftEdge")
+
+[node name="FloorWalkableArea" type="Area2D" parent="." unique_id=1463575477]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorWalkableArea" unique_id=1463575478]
+polygon = PackedVector2Array(259, 572, 2399, 575, 2195, 774, 41, 777)

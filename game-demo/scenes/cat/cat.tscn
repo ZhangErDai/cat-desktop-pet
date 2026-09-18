@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bhmjplo510f22"]
+
+[ext_resource type="Script" uid="uid://b0wfm5lomvfqs" path="res://scripts/cat/cat_body.gd" id="1_cat_body"]
+[ext_resource type="Script" uid="uid://70xnjbk2bs2n" path="res://scripts/cat/cat_animator.gd" id="2_cat_animator"]
+[ext_resource type="Script" path="res://scripts/cat/cat_movement.gd" id="5_cat_movement"]
+[ext_resource type="Script" path="res://scripts/cat/cat_state.gd" id="6_cat_state"]
+[ext_resource type="SpriteFrames" uid="uid://b0vmccuhqga6u" path="res://scenes/cat/cat_animations.tres" id="4_cat_frames"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_t8swq"]
+a = Vector2(10, 0)
+b = Vector2(30, 0)
+
+[node name="Cat" type="CharacterBody2D" unique_id=111927461]
+z_index = 5
+collision_layer = 0
+script = ExtResource("1_cat_body")
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=406800068]
+z_index = 5
+texture_filter = 1
+scale = Vector2(0.19, 0.19)
+sprite_frames = ExtResource("4_cat_frames")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_cat_animator")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1582762249]
+position = Vector2(-17, 29)
+shape = SubResource("SegmentShape2D_t8swq")
+
+[node name="State" type="Node" parent="."]
+script = ExtResource("6_cat_state")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("5_cat_movement")
